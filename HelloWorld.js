@@ -5,8 +5,8 @@ var http = require('http').Server(app);
 app.use(express.static('public'));  //靜態檔案放置區
 
 app.get('/', function(req, res) {
-    // res.send('Hello World!');
-    res.sendFile(__dirname + '/index.html');
+    res.send('Hello World!');
+    // res.sendFile(__dirname + '/index.html');
 });
 
 const host = '0.0.0.0';

@@ -4,16 +4,16 @@ var http = require('http').Server(app);
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : '',
-  user     : '',
-  password : '',
-  database : ''
+  host     : '35.221.228.175',
+  user     : 'grant',
+  password : '7e9BurMrbt88JuIC',
+  database : 'wp_db'
 });
  
 connection.connect();
 
 
-var sql = "select * from post;";
+var sql = "SELECT User, Host FROM mysql.user;";
 connection.query(sql, function (err, result) {
   if (err) throw err;
   console.log(result);
