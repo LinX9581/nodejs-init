@@ -5,7 +5,7 @@ var http = require('http').Server(app);
 app.use(express.static('public')); //靜態檔案放置區
 
 app.get('/', function(req, res) {
-    res.send('Hel!');
+    res.send('Hexxxxl!');
     // res.sendFile(__dirname + '/index.html');
 });
 
