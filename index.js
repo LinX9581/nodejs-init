@@ -2,10 +2,10 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 
-app.use(express.static('public'));  //靜態檔案放置區
+app.use(express.static('public')); //靜態檔案放置區
 
 app.get('/', function(req, res) {
-    res.send('Hello World!');
+    res.send('Hel!');
     // res.sendFile(__dirname + '/index.html');
 });
 
