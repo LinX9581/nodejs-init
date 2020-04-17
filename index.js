@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(express.static('public')); //靜態檔案放置區
 
 app.get('/', function(req, res) {
-    res.send('Hsdfsdfasasdasdasssssssssssssssssssssssssddasde!');
+    res.send('Hsdfsdfasasdasdasssssssssssssssssssssssssssssssssssssssssssssssssssssddasde!');
     // res.sendFile(__dirname + '/index.html');
     console.log("asd")
 });
