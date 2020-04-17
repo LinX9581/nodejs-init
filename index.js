@@ -7,17 +7,11 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static('public')); //靜態檔案放置區
 
-<<<<<<< HEAD
 app.get('/', function (req, res) {
     res.send('Hsdfsdfasasdasdasddasde!');
-=======
-app.get('/', function(req, res) {
-    res.send('sde!');
->>>>>>> f4f1b9b06d81042a2a8e0c2fb15cf7401fef56bf
     // res.sendFile(__dirname + '/index.html');
     console.log("asd")
 });
-<<<<<<< HEAD
 app.post('/uploads', function (req, res) {
     try {
 
@@ -39,22 +33,6 @@ app.post('/uploads', function (req, res) {
         }
     } catch (err) {
         console.log(err);
-=======
-app.post('/uploads', function(req, res) {
-    console.log("true")
-    if (req == "123") {
-        console.log("Git Pull")
-        exec(`git pull`, (err, stdout, stderr) => {
-            if (err) {
-                // node couldn't execute the command
-                return;
-            }
-
-            // the *entire* stdout and stderr (buffered)
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
-        });
->>>>>>> f4f1b9b06d81042a2a8e0c2fb15cf7401fef56bf
     }
     res.send({ 'success': true, 'message': ' success' });
 });
