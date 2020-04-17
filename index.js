@@ -7,12 +7,12 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static('public')); //靜態檔案放置區
 
-app.get('/', function (req, res) {
-    res.send('Hsdfsdfasasdasdasddasde!');
+app.get('/', function(req, res) {
+    res.send('Hsdfsdfasasdasdasssssssssssssssssssssssssddasde!');
     // res.sendFile(__dirname + '/index.html');
     console.log("asd")
 });
-app.post('/uploads', function (req, res) {
+app.post('/uploads', function(req, res) {
     try {
 
         console.log(req)
@@ -40,6 +40,6 @@ app.post('/uploads', function (req, res) {
 const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
 
-http.listen(port, host, function () {
+http.listen(port, host, function() {
     console.log("Server started.......");
 });
