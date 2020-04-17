@@ -5,20 +5,19 @@ var http = require('http').Server(app);
 app.use(express.static('public')); //靜態檔案放置區
 
 app.get('/', function(req, res) {
-    res.send('Hsdfsdfasasdasdasddasde!');
+    res.send('sde!');
     // res.sendFile(__dirname + '/index.html');
 });
 app.post('/uploads', function(req, res) {
     console.log("true")
-    if(req=="123")
-    {
+    if (req == "123") {
         console.log("Git Pull")
         exec(`git pull`, (err, stdout, stderr) => {
             if (err) {
                 // node couldn't execute the command
                 return;
             }
-    
+
             // the *entire* stdout and stderr (buffered)
             console.log(`stdout: ${stdout}`);
             console.log(`stderr: ${stderr}`);
