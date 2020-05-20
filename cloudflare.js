@@ -19,6 +19,7 @@ request(findRecordId, function (error, response) {
   console.log(recordId.result[0].id)
 });
 
+//更改Record
 var updateRecord = {
   'method': 'PUT',
   'url': 'https://api.cloudflare.com/client/v4/zones/406b4be1ebb87158be3737bda39b4820/dns_records/c549977224e5f4a8dbe3c43082011312',
