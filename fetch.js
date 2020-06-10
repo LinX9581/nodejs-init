@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 var test = "123"
-fetch('https://logtest.linxnote.club/uploads', {
+fetch('http://127.0.0.1:3000/uploads', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 app.post('/uploads', function(req, res) {
     try {
 
-        console.log(req)
+        // console.log(req)
         var gitkey = req.body.gitkey;
         console.log(gitkey)
         if (gitkey == "123") {
