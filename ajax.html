@@ -9,9 +9,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="libs/utils.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
 </head>
 
 <body>
+    <div style="width:70%;">
+        <canvas id="canvas"></canvas>
+    </div>
     <script>
         var settings = {
             "url": "http://127.0.0.1:3001/chart",
@@ -25,8 +40,107 @@
             }),
         };
 
+        var date = []
+        var babyouPv = []
+        var gamePv = []
+        var chinapostPv = []
+        var bobeePv = []
+        var petmaoPv = []
+        var trendPv = []
+        var way4Pv = []
         $.ajax(settings).done(function(response) {
-            console.log(response.rs[0][1]);
+            for (var i = 0; i < 7; i++) {
+                date.push(response.game[i][0])
+                babyouPv.push(response.babyou[i][1])
+                gamePv.push(response.game[i][1])
+                chinapostPv.push(response.chinapost[i][1])
+                bobeePv.push(response.bobee[i][1])
+                petmaoPv.push(response.petmao[i][1])
+                trendPv.push(response.trend[i][1])
+                way4Pv.push(response.way4[i][1])
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: date,
+                    datasets: [{
+                        label: '姊妹淘',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: babyouPv,
+                        fill: false,
+                    }, {
+                        label: '電玩',
+                        fill: false,
+                        backgroundColor: window.chartColors.blue,
+                        borderColor: window.chartColors.blue,
+                        data: gamePv,
+                    }, {
+                        label: 'CN',
+                        fill: false,
+                        backgroundColor: window.chartColors.purple,
+                        borderColor: window.chartColors.purple,
+                        data: chinapostPv,
+                    }, {
+                        label: '保佑',
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: bobeePv,
+                    }, {
+                        label: '寵毛',
+                        fill: false,
+                        backgroundColor: window.chartColors.orange,
+                        borderColor: window.chartColors.orange,
+                        data: petmaoPv,
+                    }, {
+                        label: 'trend',
+                        fill: false,
+                        backgroundColor: window.chartColors.black,
+                        borderColor: window.chartColors.black,
+                        data: trendPv,
+                    }, {
+                        label: '四方',
+                        fill: false,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data: way4Pv,
+                    }, ]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Chart.js Line Chart'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }
+                }
+            };
+            var ctx = document.getElementById('canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
         });
     </script>
 </body>
