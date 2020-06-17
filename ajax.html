@@ -20,16 +20,32 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
+        
+        #test {
+            width: 1000px;
+            height: 1000px;
+            position: relative;
+        }
+        
+        .bg {
+            position: relative;
+        }
     </style>
 </head>
 
 <body>
-    <div style="width:70%;">
-        <canvas id="canvas"></canvas>
+    <div class="bg">
+        <div id="test">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="inner">
+        </div>
+
     </div>
     <script>
-        var settings = {
-            "url": "http://127.0.0.1:3001/chart",
+        // setInterval(rtData, 5000);
+        var rtPv = {
+            "url": "http://127.0.0.1:3001/rtUser",
             "method": "POST",
             "timeout": 0,
             "headers": {
@@ -40,7 +56,29 @@
             }),
         };
 
-        var date = []
+        function rtData() {
+            console.log("asd")
+            $.ajax(rtPv).done(function(response) {
+                $(".inner").html("<text>" + response.rtAllActiveUser + "</text>");
+                // console.log(response)
+            })
+        }
+
+
+        var settings = {
+            "url": "http://127.0.0.1:3001/nntv",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "gitkey": "123"
+            }),
+        };
+
+        var weekDate = []
+        var monthDate = []
         var babyouPv = []
         var gamePv = []
         var chinapostPv = []
@@ -50,7 +88,7 @@
         var way4Pv = []
         $.ajax(settings).done(function(response) {
             for (var i = 0; i < 7; i++) {
-                date.push(response.game[i][0])
+                weekDate.push(response.game[i][0])
                 babyouPv.push(response.babyou[i][1])
                 gamePv.push(response.game[i][1])
                 chinapostPv.push(response.chinapost[i][1])
@@ -62,7 +100,7 @@
             var config = {
                 type: 'line',
                 data: {
-                    labels: date,
+                    labels: weekDate,
                     datasets: [{
                         label: '姊妹淘',
                         backgroundColor: window.chartColors.red,
@@ -140,6 +178,84 @@
                 }
             };
             var ctx = document.getElementById('canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
+        });
+
+
+        var mainPv = []
+        var mainUser = []
+
+        var mainsiteSetting = {
+            "url": "http://127.0.0.1:3001/mainChart1",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "gitkey": "123"
+            }),
+        };
+        $.ajax(mainsiteSetting).done(function(response) {
+            console.log(response)
+                // console.log(response.mainThirtyPv[0].lenth)
+            for (var i = 0; i < 28; i++) {
+                monthDate.push(response.mainThirtyPv[i][0])
+                mainPv.push(response.mainThirtyPv[i][1])
+                mainUser.push(response.mainThirtyUser[i][1])
+            }
+            console.log(mainUser[0])
+            var config = {
+                type: 'line',
+                data: {
+                    labels: monthDate,
+                    datasets: [{
+                        label: '主網PV',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: mainPv,
+                        fill: false,
+                    }, {
+                        label: '主網User',
+                        fill: false,
+                        backgroundColor: window.chartColors.blue,
+                        borderColor: window.chartColors.blue,
+                        data: mainUser,
+                    }, ]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: '主網'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }
+                }
+            };
+            var ctx = document.getElementById('canvas1').getContext('2d');
             window.myLine = new Chart(ctx, config);
         });
     </script>
