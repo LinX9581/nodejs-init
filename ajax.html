@@ -28,7 +28,7 @@
         }
         
         .bg {
-            position: relative;
+            position: absolute;
         }
     </style>
 </head>
@@ -43,7 +43,7 @@
 
     </div>
     <script>
-        // setInterval(rtData, 5000);
+        setInterval(rtData, 5000);
         var rtPv = {
             "url": "http://127.0.0.1:3001/rtUser",
             "method": "POST",
@@ -66,7 +66,7 @@
 
 
         var settings = {
-            "url": "http://127.0.0.1:3001/nntv",
+            "url": "http://127.0.0.1:3001/nntv1",
             "method": "POST",
             "timeout": 0,
             "headers": {
