@@ -1,9 +1,9 @@
 let linebot = require('linebot')
 
 bot = linebot({
-    channelId: '',
-    channelSecret: '',
-    channelAccessToken: ''
+    channelId: '15821353551',
+    channelSecret: 'b298c64c1fcea600bdd60fdd3dfec31a',
+    channelAccessToken: 'OxUCCy/7uZzZp47OXVJ+ECS+Epgc95ndFPtaUg7Obu9GuEgK31cLrCmJiRJWqfEyijb/ETmBmQFjNZc3JJsnMrJh4ogdMLL687S8B7gLdaxKsMo7qh/3BN4AjXmUvDfrvHNYJ+toab+GmTG4G7oBLwdB04t89/1O/w1cDnyilFU='
 });
 
 bot.on('message', function(event) {
