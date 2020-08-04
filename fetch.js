@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 var key = "DLw(B5gMyvwY8sr5#ivKMC"
-fetch('https://nowbot.nownews.com/rtuser', {
+fetch('http://34.80.175.248:3000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
