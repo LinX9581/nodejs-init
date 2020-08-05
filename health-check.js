@@ -1,10 +1,10 @@
 var https = require('https');
 var schedule = require('node-schedule');
 var rule = new schedule.RecurrenceRule();
-rule.second = [0, 30];
+rule.second = [0];
 
 schedule.scheduleJob(rule, function() {
-    https.get('https://express.linxnote.club/', function(res) {
+    https.get('https://chinapost.nownews.com/', function(res) {
         console.log("statusCode: ", res.statusCode); // <======= Here's the status code
         // console.log("headers: ", res.headers);
         if (res.statusCode != 200) {
