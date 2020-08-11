@@ -2,8 +2,11 @@ let linebot = require('linebot')
 let fs = require('fs')
 var https = require('https');
 var schedule = require('node-schedule');
+const fetch = require('node-fetch');
+
 var rule = new schedule.RecurrenceRule();
-rule.second = 0;
+// rule.minute = [0,5,10,15,20,25,30,35,40,45,50,55]; 
+rule.minute = [0,10,20,30,40,50]; 
 
 bot = linebot({
     channelId: '1582135355',
@@ -11,28 +14,31 @@ bot = linebot({
     channelAccessToken: 'OxUCCy/7uZzZp47OXVJ+ECS+Epgc95ndFPtaUg7Obu9GuEgK31cLrCmJiRJWqfEyijb/ETmBmQFjNZc3JJsnMrJh4ogdMLL687S8B7gLdaxKsMo7qh/3BN4AjXmUvDfrvHNYJ+toab+GmTG4G7oBLwdB04t89/1O/w1cDnyilFU='
 });
 
-bot.on('message', function(event) {
-    let masterId = "C082408192da4c47ae5f54654196dffa2";
-    let myId = "Ue4c93d4c9216495aeae09328ebb8aefe";
-    console.log(event.message.text)
+let hostname = [
+    ['https://chinapost.nownews.com/','cn'],
+    ['https://babyou.nownews.com/','babyou'],
+    ['https://game.nownews.com/','game'],
+    ['https://petsmao.nownews.com/','petsmao'],
+    ['https://bobee.nownews.com/','bobee']
+]
 
-    schedule.scheduleJob('30 * * * * *', function() {
-        console.log("test")
-        https.get('https://chinapost.nownews.com/', function(res) {
-            console.log("statusCode: ", res.statusCode); // <======= Here's the status code
-            // console.log("headers: ", res.headers);
-            if (res.statusCode != 200) {
-                bot.push(masterId, 'CP炸掉 error code: '+res.statusCode);
-                bot.push(myId, 'CP炸掉 error code: '+res.statusCode);
-                console.log("chinapost error code: " + res.statusCode)
-            } else {
-                console.log(res.statusCode)
-            }
-        }).on('error', function(e) {
-            console.error(e);
-        });
-    })
-});
+schedule.scheduleJob(rule, async function() {
+    for(var i=0;i<hostname.length;i++)
+    {
+        const res = await fetch(hostname[i][0])
+        if (res.status != 200) {
+            bot.on('message', function(event) {
+                let masterId = "C082408192da4c47ae5f54654196dffa2";
+                let myId = "Ue4c93d4c9216495aeae09328ebb8aefe";
+                console.log(event.message.text)
+                bot.push(masterId, hostname[i][1]+"炸掉RRRRRR error code: "+ res.status);
+                bot.push(myId, hostname[i][1]+"炸掉RRRRRR error code: "+ res.status);
+                console.log(hostname[i][1]+"error code: " + res.status) 
+            });
+        }
+        console.log(hostname[i][1]+res.status)
+    }
+})
 
 const linebotParser = bot.parser(),
     express = require('express');
