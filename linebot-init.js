@@ -57,6 +57,10 @@ bot.on('message', function(event) {
     }
 });
 
+schedule.scheduleJob('0 0 9 * * *', function() {
+    bot.push(masterId, message[0] + message[1] + message[2]);
+})
+
 const linebotParser = bot.parser(),
     express = require('express');
 app = express();
