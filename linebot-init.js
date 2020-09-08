@@ -1,5 +1,6 @@
 let linebot = require('linebot')
 let fs = require('fs')
+var schedule = require('node-schedule');
 
 bot = linebot({
     channelId: '1582135355',
@@ -23,14 +24,14 @@ bot.on('message', function(event) {
             if (msgType == "image") {
                 bot.getMessageContent(event.message.id)
                     .then((imageBuffer) => {
-                        console.log(imgRandom)
-                        fs.writeFile('./public/lineimg/' + imgRandom + '.jpg', imageBuffer, function(err) {
+                        console.log(imageBuffer)
+                        fs.writeFile('./path/to/' + imgRandom + '.jpg', imageBuffer, function(err) {
                             if (err) { console.log(err) }
                         });
                     }).catch((err) => {
                         console.log(err);
                     });
-                reqImage = "https://linebot.linxnote.club/lineimg/" + imgRandom + ".jpg";
+                reqImage = "https://domain.com/lineimg/" + imgRandom + ".jpg";
             }
             linebotMsgArray.push("groupId:" + groupId, "userId:" + userId, "msgType: " + msgType, "displayName: " + displayName + ":" + msg, "image:" + reqImage)
             console.log(linebotMsgArray)
@@ -66,7 +67,7 @@ const linebotParser = bot.parser(),
 app = express();
 app.post('/webhook', linebotParser);
 var http = require('http').Server(app);
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
 app.use(express.static('public'));
 
 http.listen(port, function() {
