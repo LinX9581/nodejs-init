@@ -26,6 +26,9 @@ let hostname = [
     ['https://4wayvoice.nownews.com/', '4way']
 ]
 
+bot.on('message', async function(event) {
+    console.log(event.message.text)
+});
 schedule.scheduleJob(rule, async function() {
     for (var i = 0; i < hostname.length; i++) {
         const res = await fetch(hostname[i][0])
