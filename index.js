@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
 });
 
 const host = '0.0.0.0';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 12121;
 
 http.listen(port, host, function() {
     console.log("Server started.......");
