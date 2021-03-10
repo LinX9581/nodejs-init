@@ -37,19 +37,13 @@ async function test ()
 
     // let date = ["2021-02-08","2021-02-08"]
     let arr = ['5202270','5048211']
-    var getDataSql = "select * from post_pv_count where post_id = '5202270'";
+    var getDataSql = "select * from post_pv_count";
     let date = [arr]
     // let getDataSql = 'select * from post_pv_count where count_time between ? and ?'
 
-    const rows = await query(getDataSql,date)
+    const rows = await query(getDataSql,date,"petsmao")
     console.log(rows)
-    const row = JSON.stringify(rows);
-    console.log(row)
-    console.log(Object.values(rows))
-    for(let a in row)
-    {
-        // console.log(a)
-    }
+
     // const rows = await query('select post_id from post_pv_count limit 1000,100')
     // let postIdArray = []
     // for(var i=0; i<rows.length; i++)
