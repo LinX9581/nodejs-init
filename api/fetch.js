@@ -14,8 +14,24 @@ const fetch = require("node-fetch");
 //     .catch((err) => {
 //         console.log('log ', err);
 //     })
+test()
+async function test() {
+    let postInfo = await fetch('http://uat.nownews.com/nn-client/api/v1/client/getPostAuthorInfo/5195277', {
+        method: 'POST',
+        headers: { 'Authorization': '980aef50ee3d1a9a09c48bdc8a9a87669250799582564813429c5712bac2eeeb' },
+    }).then(res => res.json()).then((jsonData) => { return jsonData })
 
+    console.log(postInfo)
+}
+test()
+async function test() {
+    let postInfo = await fetch('http://uat.nownews.com/nn-client/api/v1/client/getPostAuthorInfo/5195277', {
+        method: 'POST',
+        headers: { 'Authorization': '980aef50ee3d1a9a09c48bdc8a9a87669250799582564813429c5712bac2eeeb' },
+    }).then(res => res.json()).then((jsonData) => { return jsonData })
 
+    console.log(postInfo)
+}
 // fetch('https://nowbot2.nownews.com/gadata/', {
 //     method: 'POST',
 //     headers: { 'Content-Type': 'application/json' },

@@ -8,10 +8,13 @@ sudo apt -y install nodejs
 
 apt install git -y
 
-apt install nginx -y
+echo deb http://nginx.org/packages/debian/ stretch nginx | sudo tee /etc/apt/sources.list.d/nginx.list
+wget http://nginx.org/keys/nginx_signing.key && sudo apt-key add nginx_signing.key 
+sudo apt update && apt install nginx -y
 sudo systemctl enable nginx
 
 chown lin /etc/nginx/sites-enabled/default
+chown lin /etc/nginx
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
