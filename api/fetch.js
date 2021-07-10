@@ -14,7 +14,22 @@ const fetch = require("node-fetch");
 //     .catch((err) => {
 //         console.log('log ', err);
 //     })
-test()
+fetch('https://sit.linxnote.club/reInsert', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "gitkey": "2e9ea6f64122053dd711496d99091219eb15c438a532132f51297c15f75de7bf"
+    })
+}).then(res => res.json())
+    .then((jsonData) => {
+        console.log(jsonData)
+    })
+    .catch((err) => {
+        console.log('log ', err);
+    })
+// test()
 async function test() {
     let postInfo = await fetch('http://uat.nownews.com/nn-client/api/v1/client/getPostAuthorInfo/5195277', {
         method: 'POST',
@@ -23,7 +38,7 @@ async function test() {
 
     console.log(postInfo)
 }
-test()
+// test()
 async function test() {
     let postInfo = await fetch('http://uat.nownews.com/nn-client/api/v1/client/getPostAuthorInfo/5195277', {
         method: 'POST',
